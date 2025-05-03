@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify Redirect Handler</title>
+    <script>
+        // Get the access token from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('access_token');
+        
+        if (token) {
+            // Store the token in localStorage
+            localStorage.setItem('spotify_token', token);
+            
+            // Redirect back to the main app
+            window.location.href = 'http://localhost:3000';
+        } else {
+            console.error('No token received');
+        }
+    </script>
+</head>
+<body>
+    <div style="text-align: center; padding: 50px;">
+        <h2>Loading...</h2>
+        <p>Please wait while we redirect you back to the app.</p>
+    </div>
+</body>
+</html>
