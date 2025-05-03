@@ -15,14 +15,23 @@ git commit -m "Initial commit"
 git remote add origin https://github.com/$username/spotify-redirect-handler.git
 git push -u origin main
 
-# Enable GitHub Pages and set redirect-handler.html as the main page
-gh pages create --source main --public --cname $username.github.io/spotify-redirect-handler
-gh pages set-source main --public --cname $username.github.io/spotify-redirect-handler
-gh pages set-source main --public --cname $username.github.io/spotify-redirect-handler --build-command "echo 'Redirecting...' > index.html && cp redirect-handler.html index.html"
+# Create a CNAME file for GitHub Pages
+echo "$username.github.io/spotify-redirect-handler" > CNAME
 
-# Push the changes
+# Create an index.html that redirects to redirect-handler.html
+echo '<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="0; URL=redirect-handler.html">
+</head>
+<body>
+    Redirecting to redirect handler...
+</body>
+</html>' > index.html
+
+# Add and commit the new files
 git add .
-git commit -m "Configure GitHub Pages"
+git commit -m "Configure GitHub Pages with redirect"
 git push origin main
 
 echo "Repository setup and code pushed successfully!"
